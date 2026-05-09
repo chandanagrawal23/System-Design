@@ -1,3 +1,4 @@
 [📄 JWT Notes](./JWT_Notes.pdf)
 [📄 API Notes](./API_Notes.pdf)
 [📄 PasswordHashing_Notes](./PasswordHashing_Notes.pdf)
+[📄 BcryptArgon2_Notes](./BcryptArgon2_Notes.pdf)
