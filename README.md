@@ -2,3 +2,4 @@
 [📄 API Notes](./API_Notes.pdf)
 [📄 PasswordHashing_Notes](./PasswordHashing_Notes.pdf)
 [📄 BcryptArgon2_Notes](./BcryptArgon2_Notes.pdf)
+[📄 XML_Notes](./XML.pdf)
