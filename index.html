@@ -5,152 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chandan Agrawal | Engineering Notes</title>
 
 ```
-<style>
+<title>Chandan Agrawal | Engineering Notes</title>
 
-    *
-    {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body
-    {
-        font-family: Inter, Arial, sans-serif;
-        background: #0f172a;
-        color: #f8fafc;
-        min-height: 100vh;
-    }
-
-    .hero
-    {
-        text-align: center;
-        padding: 80px 20px 60px;
-
-        background:
-        linear-gradient(
-            135deg,
-            #0f172a,
-            #1e293b,
-            #312e81
-        );
-    }
-
-    .hero h1
-    {
-        font-size: 3rem;
-        margin-bottom: 12px;
-    }
-
-    .hero .role
-    {
-        color: #38bdf8;
-        font-size: 1.1rem;
-        margin-bottom: 20px;
-    }
-
-    .hero p
-    {
-        max-width: 700px;
-        margin: auto;
-        color: #cbd5e1;
-    }
-
-    .buttons
-    {
-        margin-top: 30px;
-    }
-
-    .buttons a
-    {
-        display: inline-block;
-        text-decoration: none;
-        color: white;
-        padding: 12px 20px;
-        margin: 5px;
-        border-radius: 10px;
-
-        background: rgba(255,255,255,.08);
-
-        transition: .3s;
-    }
-
-    .buttons a:hover
-    {
-        background: rgba(255,255,255,.18);
-    }
-
-    .section-title
-    {
-        text-align: center;
-        font-size: 2rem;
-        margin: 50px 0 30px;
-    }
-
-    .container
-    {
-        max-width: 1100px;
-        margin: auto;
-        padding: 0 20px 60px;
-
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 20px;
-    }
-
-    .card
-    {
-        display: block;
-
-        text-decoration: none;
-        color: white;
-
-        background: rgba(255,255,255,.05);
-
-        border: 1px solid rgba(255,255,255,.08);
-
-        border-radius: 16px;
-
-        padding: 24px;
-
-        transition: all .3s ease;
-    }
-
-    .card:hover
-    {
-        transform: translateY(-6px);
-
-        border-color: #38bdf8;
-
-        box-shadow:
-        0 12px 30px rgba(56,189,248,.15);
-    }
-
-    .card h3
-    {
-        margin-bottom: 10px;
-    }
-
-    .card p
-    {
-        color: #94a3b8;
-    }
-
-    footer
-    {
-        text-align: center;
-        padding: 30px;
-
-        color: #94a3b8;
-
-        border-top:
-        1px solid rgba(255,255,255,.08);
-    }
-
-</style>
+<link rel="stylesheet" href="style.css">
 ```
 
 </head>
@@ -158,77 +17,82 @@
 <body>
 
 ```
-<section class="hero">
+<div class="background"></div>
 
-    <h1>Chandan Agrawal</h1>
+<main class="container">
 
-    <div class="role">
-        Software Engineer
-    </div>
+    <section class="notes-section">
 
-    <p>
-        Backend Engineering, System Design, Distributed Systems,
-        Security and DSA.
-        Sharing concise engineering notes for interviews
-        and real-world software development.
-    </p>
+        <h1>Engineering Notes</h1>
 
-    <div class="buttons">
+        <p class="subtitle">
+            Interview prep, backend engineering, security and system design notes.
+        </p>
 
-        <a href="https://github.com/chandanagrawal23">
-            GitHub
-        </a>
+        <div class="notes-grid">
 
-    </div>
+            <a href="JWT_Notes.pdf" class="card">
+                <h3>JWT Notes</h3>
+                <p>Authentication & Authorization</p>
+            </a>
 
-</section>
+            <a href="API_Notes.pdf" class="card">
+                <h3>API Notes</h3>
+                <p>REST APIs & Design Principles</p>
+            </a>
 
-<h2 class="section-title">
-    Engineering Notes
-</h2>
+            <a href="PasswordHashing_Notes.pdf" class="card">
+                <h3>Password Hashing</h3>
+                <p>Password Security Fundamentals</p>
+            </a>
 
-<div class="container">
+            <a href="BcryptArgon2_Notes.pdf" class="card">
+                <h3>Bcrypt vs Argon2</h3>
+                <p>Modern Password Hashing</p>
+            </a>
 
-    <a href="JWT_Notes.pdf" class="card">
-        <h3>JWT Notes</h3>
-        <p>Authentication & Authorization</p>
-    </a>
+            <a href="XML.pdf" class="card">
+                <h3>XML Notes</h3>
+                <p>XML Internals & Concepts</p>
+            </a>
 
-    <a href="API_Notes.pdf" class="card">
-        <h3>API Notes</h3>
-        <p>REST APIs & Design Principles</p>
-    </a>
+            <a href="JSON_Notes.pdf" class="card">
+                <h3>JSON Notes</h3>
+                <p>JSON Structure & Internals</p>
+            </a>
 
-    <a href="PasswordHashing_Notes.pdf" class="card">
-        <h3>Password Hashing</h3>
-        <p>Password Security Fundamentals</p>
-    </a>
+            <a href="BSON_Notes.pdf" class="card">
+                <h3>BSON Notes</h3>
+                <p>MongoDB BSON Internals</p>
+            </a>
 
-    <a href="BcryptArgon2_Notes.pdf" class="card">
-        <h3>Bcrypt vs Argon2</h3>
-        <p>Modern Password Hashing</p>
-    </a>
+        </div>
 
-    <a href="XML.pdf" class="card">
-        <h3>XML Notes</h3>
-        <p>XML Internals & Concepts</p>
-    </a>
+    </section>
 
-    <a href="JSON_Notes.pdf" class="card">
-        <h3>JSON Notes</h3>
-        <p>JSON Structure & Internals</p>
-    </a>
+    <section class="about-section">
 
-    <a href="BSON_Notes.pdf" class="card">
-        <h3>BSON Notes</h3>
-        <p>MongoDB BSON Internals</p>
-    </a>
+        <h2>About</h2>
 
-</div>
+        <p>
+            Hi, I'm Chandan Agrawal.
+            Software Engineer focused on Backend Engineering,
+            Distributed Systems, System Design, Security and DSA.
+        </p>
 
-<footer>
-    Built by Chandan Agrawal
-</footer>
+        <div class="links">
+
+            <a href="https://github.com/chandanagrawal23" target="_blank">
+                GitHub
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
 ```
 
 </body>
