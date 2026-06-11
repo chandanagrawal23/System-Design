@@ -2,18 +2,20 @@ const cards = document.querySelectorAll(".card");
 
 cards.forEach((card, index) =>
 {
-card.style.opacity = "0";
-card.style.transform = "translateY(20px)";
-
-```
-setTimeout(() =>
+card.animate(
+[
 {
-    card.style.transition =
-    "opacity .4s ease, transform .4s ease";
-
-    card.style.opacity = "1";
-    card.style.transform = "translateY(0)";
-}, index * 80);
-```
-
+opacity: 0,
+transform: "translateY(20px)"
+},
+{
+opacity: 1,
+transform: "translateY(0)"
+}
+],
+{
+duration: 400,
+delay: index * 80,
+fill: "forwards"
+});
 });
