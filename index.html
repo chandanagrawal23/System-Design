@@ -1,111 +1,72 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
-<title>Engineering Notes</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
-```
-
+    <title>Engineering Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <button id="themeToggle" class="theme-toggle theme-dark" type="button" aria-label="Switch to light mode">
+        <span class="bulb-wire" aria-hidden="true"></span>
+        <span class="bulb-head" aria-hidden="true"></span>
+        <span class="bulb-base" aria-hidden="true"></span>
+        <span class="bulb-pull" aria-hidden="true"></span>
+        <span class="sr-only">Toggle theme</span>
+    </button>
+    <main class="page">
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="badge">Engineered for modern learning</span>
+                <h1>Study faster with polished engineering reference notes.</h1>
+                <p>Browse concise summaries for security, APIs, system design, data formats, and core backend concepts.</p>
+                <div class="hero-stats">
+                    <div><strong>7</strong> topics</div>
+                    <div><strong>3.5k+</strong> reads</div>
+                    <div><strong>1</strong> author</div>
+                </div>
 
-```
-<main class="container">
-
-    <section class="hero">
-
-        <span class="badge">
-            Engineering Notes
-        </span>
-
-        <h1>
-            Learn Faster.<br>
-            Understand Deeper.
-        </h1>
-
-        <p>
-            Backend Engineering, Security, APIs,
-            System Design and Data Formats.
-        </p>
-
-    </section>
-
-    <section class="notes-grid">
-
-        <a href="JWT_Notes.pdf" class="card">
-            <h3>JWT Notes</h3>
-            <p>Authentication & Authorization</p>
-        </a>
-
-        <a href="API_Notes.pdf" class="card">
-            <h3>API Notes</h3>
-            <p>REST APIs & Design Principles</p>
-        </a>
-
-        <a href="PasswordHashing_Notes.pdf" class="card">
-            <h3>Password Hashing</h3>
-            <p>Password Security Fundamentals</p>
-        </a>
-
-        <a href="BcryptArgon2_Notes.pdf" class="card">
-            <h3>Bcrypt vs Argon2</h3>
-            <p>Modern Password Hashing</p>
-        </a>
-
-        <a href="XML.pdf" class="card">
-            <h3>XML Notes</h3>
-            <p>Structure & Internals</p>
-        </a>
-
-        <a href="JSON_Notes.pdf" class="card">
-            <h3>JSON Notes</h3>
-            <p>Data Exchange Format</p>
-        </a>
-
-        <a href="BSON_Notes.pdf" class="card featured">
-            <h3>BSON Notes</h3>
-            <p>MongoDB Internals & Binary Encoding</p>
-        </a>
-
-    </section>
-
-    <footer>
-
-        <div class="footer-content">
-
-            <div>
-                Built by <strong>Chandan Agrawal</strong>
+                <div class="search-panel">
+                    <label class="search-label" for="search">Search notes</label>
+                    <input id="search" type="search" placeholder="Search by topic or keyword" autocomplete="off">
+                    <div id="resultCount" class="result-count">Showing 7 notes</div>
+                </div>
             </div>
 
-            <div class="socials">
-
-                <a href="https://github.com/chandanagrawal23" target="_blank">
-                    GitHub
+            <div class="hero-panel">
+                <a id="featuredLink" class="hero-card" href="#">
+                    <div class="hero-card-title">
+                        Featured topic
+                        <span class="hero-new-label" id="featuredNew" hidden>New</span>
+                    </div>
+                    <h2 id="featuredTitle"></h2>
+                    <p id="featuredDescription"></p>
+                    <div class="hero-tags" id="featuredTags"></div>
                 </a>
-
             </div>
+        </section>
 
-        </div>
+        <section class="notes-grid" id="notesGrid"></section>
 
-    </footer>
+        <footer class="footer">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-heading">Built by <strong>Chandan Agrawal</strong></div>
+                    <p class="footer-bio">SDE-2 at Microsoft, building scalable backend systems, developer tooling, and competitive coding resources.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/chandanagrawal23" target="_blank" class="footer-link">🐙 GitHub</a>
+                    <a href="https://instagram.com/algowithchandan" target="_blank" class="footer-link">📸 Instagram</a>
+                    <a href="https://www.linkedin.com/in/chandanagrawal23" target="_blank" class="footer-link">💼 LinkedIn</a>
+                    <a href="https://algotracker.in" target="_blank" class="footer-link">🌐 AlgoTracker</a>
+                </div>
+            </div>
+        </footer>
+    </main>
 
-</main>
-
-<script src="script.js"></script>
-```
-
+    <script src="script.js"></script>
 </body>
-
 </html>
