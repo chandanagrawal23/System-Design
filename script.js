@@ -1,87 +1,26 @@
-const notes = [
-  {
-    title: 'JWT Notes',
-    href: 'JWT_Notes.pdf',
-    description: 'Authentication & Authorization',
-    label: 'Authentication',
-    tags: ['JWT', 'Auth', 'Security']
-  },
-  {
-    title: 'API Notes',
-    href: 'API_Notes.pdf',
-    description: 'REST APIs & Design Principles',
-    label: 'API',
-    tags: ['REST', 'API', 'Design']
-  },
-  {
-    title: 'Password Hashing',
-    href: 'PasswordHashing_Notes.pdf',
-    description: 'Password Security Fundamentals',
-    label: 'Security',
-    tags: ['Password', 'Hashing', 'Security']
-  },
-  {
-    title: 'Bcrypt vs Argon2',
-    href: 'BcryptArgon2_Notes.pdf',
-    description: 'Modern Password Hashing Algorithms',
-    label: 'Security',
-    tags: ['Bcrypt', 'Argon2', 'Hashing']
-  },
-  {
-    title: 'XML Notes',
-    href: 'XML.pdf',
-    description: 'XML Structure & Internals',
-    label: 'Data Format',
-    tags: ['XML', 'Markup']
-  },
-  {
-    title: 'JSON Notes',
-    href: 'JSON_Notes.pdf',
-    description: 'JSON Data Exchange Format',
-    label: 'Data Format',
-    tags: ['JSON', 'Data']
-  },
-  {
-    title: 'BSON Notes',
-    href: 'BSON_Notes.pdf',
-    description: 'MongoDB Binary JSON Internals',
-    label: 'Database',
-    tags: ['MongoDB', 'BSON', 'Binary']
-  },
-  {
-    title: 'How Zomato Sends 50M Notifications',
-    href: 'Zomato50MRequest.pdf',
-    description: 'Production Push Notification Architecture',
-    label: 'System Design',
-    tags: ['System Design', 'Kafka', 'FCM', 'Notifications'],
-    isNew: true
-  }
-];
-
 const notesGrid = document.getElementById('notesGrid');
 const searchInput = document.getElementById('search');
 const resultCount = document.getElementById('resultCount');
+const topicsCount = document.getElementById('topicsCount');
 const featuredLink = document.getElementById('featuredLink');
 const featuredTitle = document.getElementById('featuredTitle');
 const featuredDescription = document.getElementById('featuredDescription');
 const featuredTags = document.getElementById('featuredTags');
 const featuredNew = document.getElementById('featuredNew');
 const themeToggle = document.getElementById('themeToggle');
-const bulbPull = document.querySelector('.bulb-pull');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Performance: Cache card metadata to avoid repeated DOM queries
 let cards = [];
-let isDraggingPull = false;
-let pullStartY = 0;
-let pullDistance = 0;
-let skipNextClick = false;
-const pullThreshold = 26;
+let cardMetadata = [];
+let searchDebounceTimer = null;
+const SEARCH_DEBOUNCE_MS = 300;
+let lastScrollY = 0;
 
 function applyTheme(theme) {
     document.documentElement.classList.toggle('light', theme === 'light');
     if (themeToggle) {
-        themeToggle.classList.toggle('active', theme === 'light');
-        themeToggle.classList.toggle('theme-light', theme === 'light');
-        themeToggle.classList.toggle('theme-dark', theme === 'dark');
+        themeToggle.classList.toggle('light', theme === 'light');
         themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
     }
     localStorage.setItem('site-theme', theme);
@@ -93,66 +32,23 @@ function loadTheme() {
     applyTheme(initialTheme);
 }
 
+function updateTopicsCount() {
+    if (topicsCount) {
+        topicsCount.textContent = notes.length;
+    }
+}
+
 function toggleTheme() {
     const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
     applyTheme(currentTheme === 'light' ? 'dark' : 'light');
-    themeToggle?.classList.add('active');
-    setTimeout(() => themeToggle?.classList.remove('active'), 320);
-}
-
-function updatePull(distance) {
-    pullDistance = Math.max(0, Math.min(distance, 46));
-    themeToggle.style.setProperty('--pull-distance', `${pullDistance}px`);
-    themeToggle.classList.toggle('dragging', pullDistance > 4);
-}
-
-function resetPull() {
-    pullDistance = 0;
-    updatePull(0);
-    isDraggingPull = false;
+    if (themeToggle && !reducedMotion) {
+        themeToggle.classList.add('active');
+        setTimeout(() => themeToggle.classList.remove('active'), 420);
+    }
 }
 
 if (themeToggle) {
-    themeToggle.addEventListener('click', (event) => {
-        if (skipNextClick) {
-            skipNextClick = false;
-            event.preventDefault();
-            return;
-        }
-        toggleTheme();
-    });
-}
-
-if (bulbPull) {
-    bulbPull.addEventListener('pointerdown', (event) => {
-        isDraggingPull = true;
-        pullStartY = event.clientY;
-        pullDistance = 0;
-        updatePull(0);
-        bulbPull.setPointerCapture(event.pointerId);
-    });
-
-    bulbPull.addEventListener('pointermove', (event) => {
-        if (!isDraggingPull) return;
-        const distance = event.clientY - pullStartY;
-        if (distance <= 0) {
-            updatePull(0);
-            return;
-        }
-        updatePull(distance);
-    });
-
-    bulbPull.addEventListener('pointerup', () => {
-        if (isDraggingPull && pullDistance >= pullThreshold) {
-            toggleTheme();
-            skipNextClick = true;
-        }
-        resetPull();
-    });
-
-    bulbPull.addEventListener('pointercancel', () => {
-        resetPull();
-    });
+    themeToggle.addEventListener('click', toggleTheme);
 }
 
 function updateResultCount(visibleCount, totalCount) {
@@ -194,47 +90,87 @@ function renderNotes() {
     }).join('');
 
     cards = Array.from(document.querySelectorAll('.card'));
+    
+    // Performance: Pre-cache card metadata to avoid repeated DOM queries during filtering
+    cardMetadata = cards.map(card => ({
+        element: card,
+        title: (card.querySelector('h3')?.textContent || '').toLowerCase(),
+        description: (card.querySelector('p')?.textContent || '').toLowerCase(),
+        label: (card.querySelector('.card-label')?.textContent || '').toLowerCase()
+    }));
+}
+
+// Performance: Debounce search to avoid excessive filtering on every keystroke
+function debounceFilter() {
+    if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(filterNotes, SEARCH_DEBOUNCE_MS);
 }
 
 function filterNotes() {
-    if (!searchInput) return;
+    if (!searchInput || cardMetadata.length === 0) return;
+    
     const query = searchInput.value.trim().toLowerCase();
     let visible = 0;
 
-    cards.forEach(card => {
-        const title = card.querySelector('h3')?.textContent?.toLowerCase() ?? '';
-        const description = card.querySelector('p')?.textContent?.toLowerCase() ?? '';
-        const label = card.querySelector('.card-label')?.textContent?.toLowerCase() ?? '';
+    // Performance: Batch DOM updates using visibility toggling instead of style.display
+    cardMetadata.forEach(({ element, title, description, label }) => {
         const matches = !query || title.includes(query) || description.includes(query) || label.includes(query);
-
-        card.style.display = matches ? 'block' : 'none';
-        if (matches) visible += 1;
+        element.classList.toggle('hidden', !matches);
+        if (matches) visible++;
     });
 
     updateResultCount(visible, cards.length);
 }
 
 function animateCards() {
-    cards.forEach((card, index) => {
-        card.animate(
-            [
-                { opacity: 0, transform: 'translateY(20px)' },
-                { opacity: 1, transform: 'translateY(0)' }
-            ],
-            {
-                duration: 420,
-                delay: index * 70,
-                fill: 'forwards',
-                easing: 'ease-out'
-            }
-        );
+    // Performance: Skip animations if reduced-motion is preferred
+    if (reducedMotion) return;
+    
+    // Performance: Use requestAnimationFrame to batch animations and avoid layout thrashing
+    requestAnimationFrame(() => {
+        cards.forEach((card, index) => {
+            card.animate(
+                [
+                    { opacity: 0, transform: 'translateY(20px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ],
+                {
+                    duration: 420,
+                    delay: index * 70,
+                    fill: 'forwards',
+                    easing: 'ease-out'
+                }
+            );
+        });
     });
 }
 
 loadTheme();
+updateTopicsCount();
 renderNotes();
 animateCards();
 if (searchInput) {
-    searchInput.addEventListener('input', filterNotes);
+    // Performance: Use debounced filter instead of filtering on every keystroke
+    searchInput.addEventListener('input', debounceFilter);
 }
 filterNotes();
+
+// Hide/show toggle button on scroll
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const isScrollingDown = currentScrollY > lastScrollY;
+    
+    if (currentScrollY > 100 && isScrollingDown) {
+        // Scrolling down and past top - hide button
+        themeToggle?.style.setProperty('pointer-events', 'none');
+        themeToggle?.style.setProperty('opacity', '0');
+        themeToggle?.style.setProperty('transform', 'scale(0.8)');
+    } else {
+        // At top or scrolling up - show button
+        themeToggle?.style.setProperty('pointer-events', 'auto');
+        themeToggle?.style.setProperty('opacity', '1');
+        themeToggle?.style.setProperty('transform', 'scale(1)');
+    }
+    
+    lastScrollY = currentScrollY;
+}, { passive: true });

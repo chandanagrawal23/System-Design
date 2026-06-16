@@ -10,11 +10,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="themeToggle" class="theme-toggle theme-dark" type="button" aria-label="Switch to light mode">
-        <span class="bulb-wire" aria-hidden="true"></span>
-        <span class="bulb-head" aria-hidden="true"></span>
-        <span class="bulb-base" aria-hidden="true"></span>
-        <span class="bulb-pull" aria-hidden="true"></span>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-glow" aria-hidden="true"></span>
+        <span class="theme-bulb" aria-hidden="true"></span>
         <span class="sr-only">Toggle theme</span>
     </button>
     <main class="page">
@@ -24,7 +22,7 @@
                 <h1>Study faster with polished engineering reference notes.</h1>
                 <p>Browse concise summaries for security, APIs, system design, data formats, and core backend concepts.</p>
                 <div class="hero-stats">
-                    <div><strong>7</strong> topics</div>
+                    <div><strong id="topicsCount">7</strong> topics</div>
                     <div><strong>3.5k+</strong> reads</div>
                     <div><strong>1</strong> author</div>
                 </div>
@@ -67,6 +65,7 @@
         </footer>
     </main>
 
+    <script src="notes.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
