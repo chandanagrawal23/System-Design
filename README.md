@@ -7,4 +7,7 @@
 - [📄 XML Notes](./XML.pdf)
 - [📄 JSON Notes](./JSON_Notes.pdf)
 - [📄 BSON Notes](./BSON_Notes.pdf)
+- [📄 Polling](./Polling.pdf)
+- [📄 WebHooks](./WebHooks.pdf)
+- [📄 WebSockets](./WebSockets.pdf)
 - [📄 Zomato50MRequest.pdf](./Zomato50MRequest.pdf)

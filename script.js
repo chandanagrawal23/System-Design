@@ -2,11 +2,8 @@ const notesGrid = document.getElementById('notesGrid');
 const searchInput = document.getElementById('search');
 const resultCount = document.getElementById('resultCount');
 const topicsCount = document.getElementById('topicsCount');
-const featuredLink = document.getElementById('featuredLink');
-const featuredTitle = document.getElementById('featuredTitle');
-const featuredDescription = document.getElementById('featuredDescription');
-const featuredTags = document.getElementById('featuredTags');
-const featuredNew = document.getElementById('featuredNew');
+const featuredNotes = document.getElementById('featuredNotes');
+const featuredCount = document.getElementById('featuredCount');
 const themeToggle = document.getElementById('themeToggle');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -58,25 +55,40 @@ function updateResultCount(visibleCount, totalCount) {
         : `Showing ${visibleCount} of ${totalCount} notes`;
 }
 
-function renderFeatured(note) {
-    if (!featuredLink || !featuredTitle || !featuredDescription || !featuredTags) return;
+function getFeaturedNotes() {
+    return notes.filter(note => note.isFeatured).slice(0, 3);
+}
 
-    featuredLink.href = note.href;
-    featuredTitle.textContent = note.title;
-    featuredDescription.textContent = note.description;
-    featuredTags.innerHTML = note.tags.map(tag => `<span>${tag}</span>`).join('');
-    featuredNew.hidden = !note.isNew;
+function renderFeaturedNotes() {
+    if (!featuredNotes || !featuredCount) return;
+
+    const featuredItems = getFeaturedNotes();
+    featuredCount.textContent = `${featuredItems.length} featured`;
+    featuredNotes.innerHTML = featuredItems.map(note => `
+        <a href="${note.href}" class="featured-note-card">
+            <div class="featured-note-card__top">
+                <span class="featured-note-card__label">${note.label}</span>
+                <span class="featured-note-card__badge ${note.isNew ? 'featured-note-card__badge--new' : ''}">
+                    ${note.isNew ? 'New' : 'Featured'}
+                </span>
+            </div>
+            <h3>${note.title}</h3>
+            <p>${note.description}</p>
+            <div class="featured-note-card__tags">
+                ${note.tags.map(tag => `<span>${tag}</span>`).join('')}
+            </div>
+        </a>
+    `).join('');
 }
 
 function renderNotes() {
     if (!notesGrid) return;
 
-    const featuredNote = notes[notes.length - 1];
-    renderFeatured(featuredNote);
+    renderFeaturedNotes();
 
     notesGrid.innerHTML = notes.map(note => {
         const newBadge = note.isNew ? '<span class="card-new">New</span>' : '';
-        const featuredClass = note === featuredNote ? ' featured' : '';
+        const featuredClass = note.isFeatured ? ' featured' : '';
         return `
             <a href="${note.href}" class="card${featuredClass}">
                 <div class="card-meta">

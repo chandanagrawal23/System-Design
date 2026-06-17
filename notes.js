@@ -55,5 +55,32 @@ const notes = [
     label: 'System Design',
     tags: ['System Design', 'Kafka', 'FCM', 'Notifications'],
     isNew: true
+  },
+  {
+    title: 'Polling',
+    href: 'Polling.pdf',
+    description: 'Pull-based updates and strategy trade-offs',
+    label: 'Communication',
+    tags: ['Polling', 'Sync', 'Background'],
+    isFeatured: true,
+    isNew: true
+  },
+  {
+    title: 'WebHooks',
+    href: 'WebHooks.pdf',
+    description: 'Event-driven callbacks and reliability patterns',
+    label: 'Communication',
+    tags: ['WebHooks', 'Events', 'Integration'],
+    isFeatured: true,
+    isNew: true
+  },
+  {
+    title: 'WebSockets',
+    href: 'WebSockets.pdf',
+    description: 'Real-time bidirectional messaging',
+    label: 'Realtime',
+    tags: ['WebSockets', 'Socket', 'Streaming'],
+    isFeatured: true,
+    isNew: true
   }
 ];
