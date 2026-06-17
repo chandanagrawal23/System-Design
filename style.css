@@ -673,24 +673,36 @@ body {
 @media (max-width: 860px) {
     .hero {
         grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .hero-copy {
+        max-width: 100%;
+        order: 0;
+        padding-right: 56px;
     }
 
     .hero-panel {
-        order: -1;
+        order: 1;
+        width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     .page {
         width: min(100%, 92%);
-        padding: 20px 0 32px;
+        padding: 68px 0 32px;
     }
 
     .theme-toggle {
         width: 56px;
         height: 56px;
-        top: 16px;
-        right: 16px;
+        top: 14px;
+        right: 14px;
+    }
+
+    .hero-copy {
+        padding-right: 0;
     }
 
     .hero {
@@ -777,14 +789,22 @@ body {
 @media (max-width: 640px) {
     .page {
         width: 100%;
-        padding: 16px 0 24px;
+        padding: 58px 0 24px;
     }
 
     .theme-toggle {
         width: 52px;
         height: 52px;
-        top: 12px;
-        right: 12px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .hero {
+        padding-top: 8px;
+    }
+
+    .hero-copy {
+        padding-right: 0;
     }
 
     .theme-toggle .theme-bulb {
@@ -956,7 +976,7 @@ body {
 
 @media (max-width: 480px) {
     .page {
-        padding: 12px 0 20px;
+        padding: 54px 0 20px;
     }
 
     .theme-toggle {
@@ -964,6 +984,14 @@ body {
         height: 48px;
         top: 10px;
         right: 10px;
+    }
+
+    .hero {
+        padding-top: 4px;
+    }
+
+    .hero-copy {
+        padding-right: 0;
     }
 
     .hero {
