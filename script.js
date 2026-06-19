@@ -56,7 +56,7 @@ function updateResultCount(visibleCount, totalCount) {
 }
 
 function getFeaturedNotes() {
-    return notes.filter(note => note.isFeatured).slice(0, 3);
+    return notes.filter(note => note.isFeatured);
 }
 
 function renderFeaturedNotes() {

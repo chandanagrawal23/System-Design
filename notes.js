@@ -53,33 +53,35 @@ const notes = [
     href: 'Zomato50MRequest.pdf',
     description: 'Production Push Notification Architecture',
     label: 'System Design',
-    tags: ['System Design', 'Kafka', 'FCM', 'Notifications'],
-    isNew: true
+    tags: ['System Design', 'Kafka', 'FCM', 'Notifications']
   },
   {
     title: 'Polling',
     href: 'Polling.pdf',
     description: 'Pull-based updates and strategy trade-offs',
     label: 'Communication',
-    tags: ['Polling', 'Sync', 'Background'],
-    isFeatured: true,
-    isNew: true
+    tags: ['Polling', 'Sync', 'Background']
   },
   {
     title: 'WebHooks',
     href: 'WebHooks.pdf',
     description: 'Event-driven callbacks and reliability patterns',
     label: 'Communication',
-    tags: ['WebHooks', 'Events', 'Integration'],
-    isFeatured: true,
-    isNew: true
+    tags: ['WebHooks', 'Events', 'Integration']
   },
   {
     title: 'WebSockets',
     href: 'WebSockets.pdf',
     description: 'Real-time bidirectional messaging',
     label: 'Realtime',
-    tags: ['WebSockets', 'Socket', 'Streaming'],
+    tags: ['WebSockets', 'Socket', 'Streaming']
+  },
+    {
+    title: 'BGP and BGP Hijacking',
+    href: 'BGP_BgpHijacking.pdf',
+    description: 'Route hijacking, attack patterns, and mitigation ideas',
+    label: 'Security',
+    tags: ['BGP', 'Routing', 'Hijacking', 'Security'],
     isFeatured: true,
     isNew: true
   }
