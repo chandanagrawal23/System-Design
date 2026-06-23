@@ -76,12 +76,21 @@ const notes = [
     label: 'Realtime',
     tags: ['WebSockets', 'Socket', 'Streaming']
   },
-    {
+  {
     title: 'BGP and BGP Hijacking',
     href: 'BGP_BgpHijacking.pdf',
     description: 'Route hijacking, attack patterns, and mitigation ideas',
     label: 'Security',
     tags: ['BGP', 'Routing', 'Hijacking', 'Security'],
+    isFeatured: true,
+    isNew: true
+  },
+  {
+    title: 'Authentication vs Authorization',
+    href: 'AuthenticationVSAuthorisation.pdf',
+    description: 'Key differences, examples, and security fundamentals',
+    label: 'Security',
+    tags: ['Authentication', 'Authorization', 'Security'],
     isFeatured: true,
     isNew: true
   }
