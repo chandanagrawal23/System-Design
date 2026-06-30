@@ -93,5 +93,14 @@ const notes = [
     tags: ['Authentication', 'Authorization', 'Security'],
     isFeatured: true,
     isNew: true
+  },
+  {
+    title: 'How Redis Works',
+    href: 'How_Redis.pdf',
+    description: 'Redis internals, persistence, replication, and performance ideas',
+    label: 'Database',
+    tags: ['Redis', 'Caching', 'Database'],
+    isFeatured: true,
+    isNew: true
   }
 ];

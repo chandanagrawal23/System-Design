@@ -12,3 +12,4 @@
 - [📄 WebHooks](./WebHooks.pdf)
 - [📄 WebSockets](./WebSockets.pdf)
 - [📄 Zomato50MRequest.pdf](./Zomato50MRequest.pdf)
+- [📄 How Redis Works](./How_Redis.pdf)
